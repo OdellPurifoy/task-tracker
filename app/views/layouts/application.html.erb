@@ -5,36 +5,49 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar w/ text</a>
+      <%= link_to 'TaskTracker', root_path, class: "navbar-brand" %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-        </ul>
-        <span class="navbar-text">
-          Navbar text with an inline element
-        </span>
-      </div>
-    </nav>
+        <% if user_signed_in? && user.admin? %>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <%= link_to 'Create Task', new_task_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to 'Edit Account', edit_user_registration_path, class: "btn btn-primary" %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class:"btn btn-danger" %>
+            </li>
+          </ul>
+          <% elsif user_signed_in? && !user.admin %>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <%= link_to 'Edit Account', edit_user_registration_path, class: "btn btn-primary" %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class:"btn btn-danger" %>
+              </li>
+            </ul>
+          <% else %>
+            <span class="navbar-text">
+              <%= link_to 'Sign In', new_user_session_path, class: "btn btn-primary" %>
+              <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary" %>
+            </span>
+          <% end %>
+        </div>
+      </nav>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-  </body>
-</html>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </body>
+  </html>
