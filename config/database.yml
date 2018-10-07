@@ -14,12 +14,12 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
+  password: Team24524!!
   socket: /tmp/mysql.sock
 
 development:
   <<: *default
-  database: task-tracker_development
+  database: task_tracker_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: task-tracker_production
+  database: task_tracker_production
   username: task-tracker
   password: <%= ENV['TASK-TRACKER_DATABASE_PASSWORD'] %>
