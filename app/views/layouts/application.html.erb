@@ -16,7 +16,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
-        <% if user_signed_in? && user.admin? %>
+        <% if user_signed_in? && current_user.admin? %>
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <%= link_to 'Create Task', new_task_path, class: "nav-link" %>
@@ -28,7 +28,7 @@
               <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class:"btn btn-danger" %>
             </li>
           </ul>
-          <% elsif user_signed_in? && !user.admin %>
+          <% elsif user_signed_in? && !current_user.admin? %>
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
                 <%= link_to 'Edit Account', edit_user_registration_path, class: "btn btn-primary" %>
