@@ -1,0 +1,21 @@
+<%= form_with scope: :task, url: tasks_path, local: true do |f| %>
+<p>
+  <%= f.label :task %>
+  <%= f.text_field :task %>
+</p>
+
+<p>
+  <%= f.label :descritpion %>
+  <%= f.text_area :description %>
+</p>
+
+<p>
+  <%= f.label :due_date %>
+  <%= f.date_field :due_date %>
+</p>
+
+<!-- <%= radio_button_tag(:completed, "Completed") %> <%= label_tag(:age_child, "I am younger than 21") %> <%= radio_button_tag(:not_completed, "Not") %> <%= label_tag(:age_adult, "I'm over 21") %> -->
+
+<%= f.submit 'Edit' %>
+
+<% end %>

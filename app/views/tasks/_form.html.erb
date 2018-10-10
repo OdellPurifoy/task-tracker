@@ -1,0 +1,26 @@
+<!-- <%= simple_form_for(@task) do |f| %> <%= f.error_notification %> <div class="field"> <div class="control"> <%= f.input :task_name, label: "Task Name", input_html: { class: "input"}, wrapper: false, label_html: {class: "label"}, placeholder:
+"Task name...", autofocus: true %> </div> <div class="control"> <%= f.input :description, label: "Task Description", input_html: { class: "textarea" }, wrapper: false, label_html: {class: "label"}, placeholder: "Task descritpion...", autofocus: true
+%> </div> <div class="control"> <%= f.input :due_date, label: "Due Date", input_html: { class: "date" }, wrapper: false, label_html: {class: "label"}, autofocus: true %> </div> <div class="control"> <%= f.input :completed, as: :radio_buttons %>
+</div> </div> <%= f.button :submit, class: "btn btn-primary" %> <% end %> -->
+
+<%= form_with scope: :task, url: tasks_path, local: true do |f| %>
+<p>
+  <%= f.label :task %>
+  <%= f.text_field :task %>
+</p>
+
+<p>
+  <%= f.label :descritpion %>
+  <%= f.text_area :description %>
+</p>
+
+<p>
+  <%= f.label :due_date %>
+  <%= f.date_field :due_date %>
+</p>
+
+<!-- <%= radio_button_tag(:completed, "Completed") %> <%= label_tag(:age_child, "I am younger than 21") %> <%= radio_button_tag(:not_completed, "Not") %> <%= label_tag(:age_adult, "I'm over 21") %> -->
+
+<%= f.submit 'Edit' %>
+
+<% end %>
