@@ -1,6 +1,9 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order("created_at DESC")
+    @all_tasks = Task.all
   end
 
   def show
@@ -8,7 +11,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    @task = current_user.tasks.build
   end
 
   def edit
@@ -16,13 +19,18 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.create(task_params)
+    @task = current_user.tasks.build(task_params)
+    if @task.save
+      redirect_to @task
+    else
+      render 'new'
+    end
   end
 
   def update
     @task = Task.find(params[:id])
 
-    if @task.update_attributes
+    if @task.update
       redirect_to @task
     else
       render 'edit'
@@ -38,6 +46,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:task_name, :descritpion, :due_date, :completed)
+    params.require(:task).permit(:task_name, :descritpion, :due_date)
   end
 end
