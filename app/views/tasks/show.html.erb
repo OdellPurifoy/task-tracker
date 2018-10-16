@@ -7,3 +7,6 @@
   <strong>Description:</strong>
   <%= @task.description %>
 </p>
+
+<%= link_to "Edit", edit_task_path, :class => "btn btn-primary" %>
+<%= link_to "Delete", task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %>
