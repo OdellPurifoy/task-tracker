@@ -1,30 +1,23 @@
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src=".../800x400?auto=yes&bg=777&fg=555&text=First slide" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src=".../800x400?auto=yes&bg=666&fg=444&text=Second slide" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src=".../800x400?auto=yes&bg=555&fg=333&text=Third slide" alt="Third slide">
-    </div>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Fluid jumbotron</h1>
+    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
   </div>
 </div>
 
-<h1>All Tasks</h1>
-
-<table>
-  <tr>
-    <th>Task Name</th>
-    <th>Description</th>
-  </tr>
+<div class="container">
+  <h1>All Tasks</h1>
 
   <% @tasks.each do |task| %>
-    <tr>
-      <td><%= task.task_name %></td>
-      <td><%= task.description %></td>
-      <td><%= link_to 'Show', task_path(task) %></td>
-    </tr>
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="..." alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title"><%= task.task_name %></h5>
+        <p class="card-text"><%= task.description %></p>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Show', task_path(task) %></td>
+        <% end %>
+      </div>
+    </div>
   <% end %>
-</table>
+</div>
