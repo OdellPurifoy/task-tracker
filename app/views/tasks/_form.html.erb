@@ -19,6 +19,11 @@
       </div>
 
       <div class="field">
+        <%= f.label :assignee %><br/>
+        <%= f.text_field :assignee, autofocus: true, autocomplete: "Assignee" %>
+      </div>
+
+      <div class="field">
         <%= f.button :submit %>
       </div>
 
